@@ -24,12 +24,57 @@ def c_func(idx):
     return 1.0 if idx > 0 else 1 / math.sqrt(2)
 
 
-def extract_data():
-    pass
+def _hex_dec(tokens):
+    result_list = []
+    for token in tokens:
+        result_list.append(int(token, 16))
+    return result_list
 
 
-def save_data():
-    pass
+def _get_matrix_str(input_matrix):
+    if input_matrix.dtype == float:
+        return '\n'.join(' '.join('%5.2f' %x for x in y) for y in input_matrix)
+    elif input_matrix.dtype == int:
+        return '\n'.join(' '.join('%d' %x for x in y) for y in input_matrix)
+    else:
+        return '\n'.join(' '.join('%s' %x for x in y) for y in input_matrix)
+
+
+def extract_data(filename="input.txt"):
+    hex_input = []
+    dec_input = []
+    with open(filename, 'rb') as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                tokens = [token for token in line.split(' ') if token]
+                hex_input.append(tokens)
+                dec_input.append(_hex_dec(tokens))
+
+    hex_input = np.array(hex_input)
+    dec_input = np.array(dex_input, dtype=float)
+    hex_output = []
+    dec_output = []
+    for row in xrange(0, 16, 8):
+        for col in xrange(0, 16, 8):
+            hex_output.append(hex_input[row:row + 8, col:col + 8].tolist())
+            dec_output.append(dec_input[row:row + 8, col:col + 8].tolist())
+    dec_output = np.array(dec_output, dtype=float)
+    hex_output = np.array(hex_output)
+    print dec_output.shape
+    return dec_output, hex_output
+
+
+def save_data(hex_data, dec_data, fdct, idct, qnt, iqnt, quantizer=HUE_QUANTISER, filename="output.txt"):
+    with open(filename, 'ab') as f:
+        f.write("------------------Start of Image block(8x8)------------------"
+        f.write("The original data:\n" + _get_matrix_str(hex_data))
+        f.write("Transform to decimal:\n" + _get_matrix_str(dec_data))
+        f.write("Forward DCT:\n" + _get_matrix_str(fdct))
+        f.write("Inverse DCT:\n" + _get_matrix_str(idct))
+        f.write("Quantizasion:\n" + _get_matrix_str(qnt))
+        f.write("Inverse Quantizasion:\n" + _get_matrix_str(iqnt))
+        f.write("------------------End of Image block(8x8)-------------\n"
 
 
 def forward_dct(image_block):
@@ -114,7 +159,15 @@ def test_func():
 
 
 def main():
-    test_func()
+    dec_output, hex_output = extract_data()
+    output_file = "output.txt"
+    with open(output_file, "wb") as f:
+        f.write("Start of the whole program!")
+
+    item_num = dec_output.shape[0]
+    for idx in xrange(item_num):
+        pass
+        # TODO process one image block and write it down
 
 
 if __name__ == '__main__':
