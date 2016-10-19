@@ -64,7 +64,7 @@ def extract_data(filename="input.txt"):
     return dec_output, hex_output
 
 
-def save_data(hex_data, dec_data, fdct, idct, qnt, iqnt, filename, quantizer=HUE_QUANTISER):
+def save_data(hex_data, dec_data, fdct, idct, recnstct, qnt, iqnt, filename, quantizer=HUE_QUANTISER):
     with open(filename, 'ab') as f:
         f.write("\n------------------Start of Image block(8x8)-----------------\n")
         f.write("The original data:\n" + _get_matrix_str(hex_data))
@@ -75,6 +75,7 @@ def save_data(hex_data, dec_data, fdct, idct, qnt, iqnt, filename, quantizer=HUE
         f.write("\nQuantization:\n" + _get_matrix_str(qnt))
         f.write("\nInverse Quantization:\n" + _get_matrix_str(iqnt))
         f.write("\nInverse DCT:\n" + _get_matrix_str(idct))
+        f.write("\nReconstruct data:\n" + _get_matrix_str(recnstct))
         f.write("\n-------------------End of Image block(8x8)------------------\n")
 
 
@@ -97,13 +98,23 @@ def forward_dct(image):
     # I should try to remove the for loop by using matrix
     for u in xrange(8):
         for v in xrange(8):
-            # construct a 8x8 matrix of the cos part 
+            # construct a 8x8 matrix of the cos part
             cos_part = uv_cos[u, :].reshape((8, 1)) * uv_cos[v, :]
             # get the sum part
             sum_part = np.sum(np.multiply(image_block, cos_part))
             fdct[u, v] = 1.0 / 4 * c_func(u) * c_func(v) * sum_part
 
     return fdct
+
+
+def quantisation(fdct, quantizer=HUE_QUANTISER):
+    quantizer = np.array(quantizer, dtype=float)
+    sq = np.round(np.divide(fdct, quantizer))
+    return sq.astype(int)
+
+
+def inverse_qnt(sq, quantizer=HUE_QUANTISER):
+    return np.multiply(sq, quantizer)
 
 
 def inverse_dct(iqnt):
@@ -130,14 +141,8 @@ def inverse_dct(iqnt):
     return idct
 
 
-def quantisation(fdct, quantizer=HUE_QUANTISER):
-    quantizer = np.array(quantizer, dtype=float)
-    sq = np.round(np.divide(fdct, quantizer))
-    return sq.astype(int)
-
-
-def inverse_qnt(sq, quantizer=HUE_QUANTISER):
-    return np.multiply(sq, quantizer)
+def reconstruct_data(idct):
+    return (idct + 128.0).astype(int)
 
 
 def main():
@@ -153,7 +158,8 @@ def main():
         qnt = quantisation(fdct)
         iqnt = inverse_qnt(qnt)
         idct = inverse_dct(iqnt)
-        save_data(hex_output[idx], dec_output[idx], fdct, idct, qnt, iqnt, output_filename)
+        recnstct = reconstruct_data(idct)
+        save_data(hex_output[idx], dec_output[idx], fdct, idct, recnstct, qnt, iqnt, output_filename)
 
     print("Successfully finished! Open file '%s' to check out the result" % output_filename)
 
