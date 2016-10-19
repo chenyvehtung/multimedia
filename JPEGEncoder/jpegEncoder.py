@@ -97,7 +97,7 @@ def forward_dct(image):
     # I should try to remove the for loop by using matrix
     for u in xrange(8):
         for v in xrange(8):
-            # get a 8x8 array using numpy broadcast
+            # construct a 8x8 matrix of the cos part 
             cos_part = uv_cos[u, :].reshape((8, 1)) * uv_cos[v, :]
             # get the sum part
             sum_part = np.sum(np.multiply(image_block, cos_part))
@@ -106,13 +106,15 @@ def forward_dct(image):
     return fdct
 
 
-def inverse_dct(fdct):
+def inverse_dct(iqnt):
     def generate_cos(idx):
         return [math.cos((2 * idx + 1) * u * math.pi / 16) for u in xrange(8)]
 
+    iqnt_f = iqnt.astype(float)
+
     c_list = [c_func(idx) for idx in xrange(8)]
     cc_part = np.array(c_list, dtype=float).reshape((8, 1)) * np.array(c_list, dtype=float)
-    f_part = np.multiply(cc_part, fdct)
+    f_part = np.multiply(cc_part, iqnt_f)
 
     ij_cos = []
     for idx in xrange(8):
@@ -122,7 +124,6 @@ def inverse_dct(fdct):
     idct = np.zeros((8, 8))
     for i in xrange(8):
         for j in xrange(8):
-            # using numpy broadcast to get a 8x8 array
             cos_part = ij_cos[i, :].reshape((8, 1)) * ij_cos[j, :]
             idct[i, j] = 1.0 / 4 * np.sum( np.multiply(f_part, cos_part) )
 
@@ -131,7 +132,6 @@ def inverse_dct(fdct):
 
 def quantisation(fdct, quantizer=HUE_QUANTISER):
     quantizer = np.array(quantizer, dtype=float)
-    # well, I should find a way to fit the round type of the document :(
     sq = np.round(np.divide(fdct, quantizer))
     return sq.astype(int)
 
@@ -150,9 +150,9 @@ def main():
     for idx in xrange(dec_output.shape[0]):
         print "Dealing with the image block %d......" % idx
         fdct = forward_dct(dec_output[idx])
-        idct = inverse_dct(fdct)
         qnt = quantisation(fdct)
         iqnt = inverse_qnt(qnt)
+        idct = inverse_dct(iqnt)
         save_data(hex_output[idx], dec_output[idx], fdct, idct, qnt, iqnt, output_filename)
 
     print("Successfully finished! Open file '%s' to check out the result" % output_filename)
