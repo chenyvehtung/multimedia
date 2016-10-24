@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>740</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,63 +18,65 @@
     <item row="0" column="0">
      <widget class="QLineEdit" name="editPath"/>
     </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="buttonOpen">
-      <property name="text">
-       <string>Open Folder</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
+    <item row="0" column="2">
      <widget class="QPushButton" name="buttonSearch">
       <property name="text">
        <string>Search</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="4">
-     <widget class="QComboBox" name="comboAlg">
-      <item>
-       <property name="text">
-        <string>AHash</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>PHash</string>
-       </property>
-      </item>
+    <item row="1" column="0" colspan="3">
+     <layout class="QGridLayout" name="gridShow"/>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="buttonOpen">
+      <property name="text">
+       <string>Open Folder</string>
+      </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="6">
-     <layout class="QGridLayout" name="gridShow">
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelWait">
-        <property name="text">
-         <string>Searching for the similar image</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelWel">
-        <property name="font">
-         <font>
-          <family>HVD Bodedo</family>
-          <pointsize>25</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Welcome to Unique Image</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <item row="1" column="0" colspan="3">
+     <widget class="QLabel" name="labelCon">
+      <property name="font">
+       <font>
+        <family>HVD Bodedo</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Congratulation!
+The directory doesn't contain any duplicate images</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QLabel" name="labelWel">
+      <property name="font">
+       <font>
+        <family>HVD Bodedo</family>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Welcome to Unique Image</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QLabel" name="labelWait">
+      <property name="text">
+       <string>Searching for the similar image</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -83,7 +85,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>740</width>
      <height>25</height>
     </rect>
    </property>
@@ -95,9 +97,31 @@
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionHomepage"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpen_Folder"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
   <action name="actionUser_Guide">
    <property name="text">
     <string>User Guide</string>
@@ -108,7 +132,48 @@
     <string>About</string>
    </property>
   </action>
+  <action name="actionHomepage">
+   <property name="text">
+    <string>Homepage</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionOpen_Folder">
+   <property name="text">
+    <string>Open Folder</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>uniqimg</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

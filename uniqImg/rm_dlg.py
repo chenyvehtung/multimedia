@@ -35,7 +35,10 @@ class RemoveDlg(QtGui.QDialog):
         # print idx
         cur_img = self.img_list[idx]
         scene = QtGui.QGraphicsScene()
-        scene.addPixmap(QtGui.QPixmap(cur_img))
+        pixmap = QtGui.QPixmap(cur_img)
+        img_width = self.ui.graphicsView.size().width()
+        pixmap = pixmap.scaledToWidth(int(img_width) - 5)
+        scene.addPixmap(pixmap)
         self.ui.graphicsView.setScene(scene)
 
     def rm_imgs(self):
