@@ -14,32 +14,7 @@
    <string>Similar Image</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" colspan="4">
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="4" colspan="2">
+   <item row="0" column="1" colspan="2">
     <widget class="QGraphicsView" name="graphicsView"/>
    </item>
    <item row="1" column="0">
@@ -49,19 +24,22 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="4">
+   <item row="1" column="1">
     <widget class="QPushButton" name="buttonCancel">
      <property name="text">
       <string>Cancel</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="5">
+   <item row="1" column="2">
     <widget class="QPushButton" name="buttonRemove">
      <property name="text">
       <string>Remove</string>
      </property>
     </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QListView" name="listView"/>
    </item>
   </layout>
  </widget>
