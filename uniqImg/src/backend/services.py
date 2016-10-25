@@ -34,7 +34,7 @@ def find_simialr_imgs(userpath, hash_method, search_depth):
     searchfunc = None
     if search_depth == "current":
         searchfunc = os.listdir
-    elif search_depth == "recurrent":
+    elif search_depth == "recursive":
         searchfunc = _get_filepaths
     else:
         searchfunc = os.listdir

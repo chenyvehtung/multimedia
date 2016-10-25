@@ -55,7 +55,7 @@ class MainWin(QtGui.QMainWindow):
         self.comboMethod = QtGui.QComboBox()
         self.comboMethod.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ui.toolBar.addWidget(self.comboMethod)
-        self.comboMethod.insertItems(1, ["recurrent", "current"])
+        self.comboMethod.insertItems(1, ["recursive", "current"])
         self.comboMethod.setToolTip("Search Depth")
 
     # setting up the actions
