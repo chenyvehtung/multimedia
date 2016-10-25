@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BIN_PATH='/usr/bin'
+SRC_PATH='/usr/share/uniqimg'
+
+ln -s $SRC_PATH/uniqimg.py $BIN_PATH/uniqimg
