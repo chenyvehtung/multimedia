@@ -1,6 +1,6 @@
 # UNIQIMG (Unique Image)
 
-![icon](/screenshots/icon.png)
+![icon](screenshots/icon.png)
 
 A simple application for removing similar images in the selected path. Based on PyQt4
 
@@ -60,17 +60,17 @@ sh mkpkg.sh
 
 * Homepage
 
-![](/screenshots/1.jpeg)
+![](screenshots/1.jpeg)
 
 * Result page
 
-![](/screenshots/2.jpeg)
+![](screenshots/2.jpeg)
 
 * Similar image detail page
 
-![](/screenshots/3.jpeg)
-![](/screenshots/4.jpeg)
+![](screenshots/3.jpeg)
+![](screenshots/4.jpeg)
 
 * Remove image dialog
 
-![](/screenshots/5.jpeg)
+![](screenshots/5.jpeg)
