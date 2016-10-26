@@ -9,7 +9,7 @@ including finding similar images, remove image files
 __all__ = ["find_simialr_imgs", "del_images"]
 
 from PIL import Image
-from imagehash import average_hash, phash, phash_simple, dhash, dhash_vertical
+from imagehash import average_hash, phash, dhash
 import os
 
 
@@ -30,7 +30,7 @@ def find_simialr_imgs(userpath, hash_method, search_depth):
         f = filename.lower()
         return f.endswith(".png") or f.endswith(".jpg") or f.endswith(".jpeg") \
                 or f.endswith(".bmp") or f.endswith(".gif")
-
+    # set up path searching depth
     searchfunc = None
     if search_depth == "current":
         searchfunc = os.listdir
@@ -38,9 +38,10 @@ def find_simialr_imgs(userpath, hash_method, search_depth):
         searchfunc = _get_filepaths
     else:
         searchfunc = os.listdir
-    image_filenames = [os.path.join(userpath, path) for path in searchfunc(userpath)
+    image_filenames = [unicode(os.path.join(userpath, path), 'utf-8')
+                       for path in searchfunc(userpath.encode('utf-8'))
                         if is_image(path)]
-
+    # set up hash function
     hashfunc = None
     if hash_method == 'aHash':
         hashfunc = average_hash
@@ -48,16 +49,37 @@ def find_simialr_imgs(userpath, hash_method, search_depth):
         hashfunc = phash
     elif hash_method == 'dHash':
         hashfunc = dhash
-
+    # get image hash value and store them in a dictionary
     images_hash = {}
     for img in sorted(image_filenames):
         hash_value = hashfunc(Image.open(img))
         images_hash[img] = [hash_value, 0]
-
+    # classfy the images
     images_cls = {}
-    # under constructing...
-    # use bfs to set class for images, whoes hash_value different is less than 8
+    while True:
+        cnt = 0
+        # find the image that hasn't been classified as the new class entrance
+        for k, v in images_hash.iteritems():
+            if v[1] != 0:
+                cnt += 1
+            else:  # image is not classified
+                cur_cls = len(images_cls) + 1
+                entrance_img_hash = v[0]
 
+                images_cls[cur_cls] = []
+                images_cls[cur_cls].append([k, str(entrance_img_hash)])
+
+                images_hash[k][1] = cur_cls
+                break
+        # if all the image are classified, break
+        if cnt >= len(images_hash):
+            break
+        # find the similar image and append to the current class
+        for k, v in images_hash.iteritems():
+            if v[1] == 0 and v[0] - entrance_img_hash <= 8:
+                images_cls[cur_cls].append([k, str(v[0])])
+                # update class in the hash table
+                images_hash[k][1] = cur_cls
 
     return images_cls
 

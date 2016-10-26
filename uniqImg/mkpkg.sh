@@ -20,4 +20,4 @@ cp -f ./src/ui/*.py ./pkg/$SRC_PATH/ui/
 cp -f ./src/image/icon.png ./pkg/$ICON_PATH/uniqimg.png
 cp -f ./src/uniqimg.desktop ./pkg/$APP_PATH/
 
-dpkg -b ./pkg uniqimg_0.1.0_all.deb
+dpkg -b ./pkg uniqimg_0.1.2_all.deb

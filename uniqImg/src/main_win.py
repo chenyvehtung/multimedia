@@ -17,15 +17,15 @@ class GdDlg(QtGui.QDialog):
 
 
 class QScene(QtGui.QGraphicsScene):
-    clicked = QtCore.pyqtSignal(str)
+    clicked = QtCore.pyqtSignal(int)
 
-    def __init__(self, obj_hash):
+    def __init__(self, obj_cls):
         QtGui.QGraphicsScene.__init__(self)
-        self.obj_hash = obj_hash
+        self.obj_cls = obj_cls
 
     def mousePressEvent(self, ev):
         if ev.button() == QtCore.Qt.LeftButton:
-            self.clicked.emit(self.obj_hash)
+            self.clicked.emit(self.obj_cls)
 
 
 class MainWin(QtGui.QMainWindow):
@@ -91,7 +91,7 @@ class MainWin(QtGui.QMainWindow):
 
     def image_search(self):
         self.label_show("labelWait")
-        userpath = str(self.ui.editPath.text())
+        userpath = unicode(self.ui.editPath.text())
         hash_method = self.comboAlg.currentText()
         search_depth = self.comboMethod.currentText()
         self.images = find_simialr_imgs(userpath, hash_method, search_depth)
@@ -112,8 +112,8 @@ class MainWin(QtGui.QMainWindow):
             if len(img_list) > 1:
                 no_duplicate = False
                 grview = QtGui.QGraphicsView()
-                scene = QScene(obj_hash=str(k))
-                pixmap = QtGui.QPixmap(img_list[0])
+                scene = QScene(obj_cls=int(k))
+                pixmap = QtGui.QPixmap(unicode(img_list[0][0]))
                 pixmap = pixmap.scaled(grview.size().height() / 2,
                                        grview.size().width() / 2,
                                        QtCore.Qt.KeepAspectRatio)
@@ -130,8 +130,8 @@ class MainWin(QtGui.QMainWindow):
         if no_duplicate:
             self.label_show("labelCon")
 
-    def open_rm_dlg(self, hash_value):
-        rmdlg = RemoveDlg(self.images[str(hash_value)])
+    def open_rm_dlg(self, img_cls):
+        rmdlg = RemoveDlg(self.images[int(img_cls)])
         rmdlg.exec_()
         # reshow gridShow for update
         self.image_show()
@@ -143,6 +143,7 @@ class MainWin(QtGui.QMainWindow):
         if label_name == "labelWait":
             self.ui.labelWait.setVisible(True)
             self.ui.statusbar.showMessage("  Searching...")
+            # print "Searching....."
         elif label_name == "labelWel":
             self.ui.labelWel.setVisible(True)
             self.ui.statusbar.showMessage("  Welcome")

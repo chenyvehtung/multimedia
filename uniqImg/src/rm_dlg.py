@@ -15,7 +15,7 @@ class RemoveDlg(QtGui.QDialog):
 
         model = QtGui.QStandardItemModel()
         for idx in xrange(len(img_list)):
-            item = QtGui.QStandardItem(str(img_list[idx]))
+            item = QtGui.QStandardItem(unicode(img_list[idx][0]))
             item.setCheckState(QtCore.Qt.Unchecked)
             item.setCheckable(True)
             model.appendRow(item)
@@ -33,7 +33,7 @@ class RemoveDlg(QtGui.QDialog):
 
     def image_show(self, idx):
         # print idx
-        cur_img = self.img_list[idx]
+        cur_img = unicode(self.img_list[idx][0])
         scene = QtGui.QGraphicsScene()
         pixmap = QtGui.QPixmap(cur_img)
         img_width = self.ui.graphicsView.size().width()
@@ -55,7 +55,7 @@ class RemoveDlg(QtGui.QDialog):
             ans = QMessageBox.question(None, "Remove Images", msg_text,
                                     QMessageBox.Yes or QMessageBox.No, QMessageBox.No)
             if ans == QMessageBox.Yes:
-                status, info = del_images([self.img_list[idx] for idx in rm_imgs_id])
+                status, info = del_images([unicode(self.img_list[idx][0]) for idx in rm_imgs_id])
                 if status:
                     QMessageBox.information(None, "Remove Succeed", info, QMessageBox.Ok)
                     # remove the delete images from img_list
