@@ -49,7 +49,7 @@ class MainWin(QtGui.QMainWindow):
         self.comboAlg = QtGui.QComboBox()
         self.comboAlg.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.ui.toolBar.addWidget(self.comboAlg)
-        self.comboAlg.insertItems(1, ["ahash", "phash", "phash-s", "dhash-h", "dhash-v"])
+        self.comboAlg.insertItems(1, ["aHash", "pHash", "dHash"])
         self.comboAlg.setToolTip("Hash Algorithm")
 
         self.comboMethod = QtGui.QComboBox()

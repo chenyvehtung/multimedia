@@ -42,24 +42,24 @@ def find_simialr_imgs(userpath, hash_method, search_depth):
                         if is_image(path)]
 
     hashfunc = None
-    if hash_method == 'ahash':
+    if hash_method == 'aHash':
         hashfunc = average_hash
-    elif hash_method == "phash":
+    elif hash_method == "pHash":
         hashfunc = phash
-    elif hash_method == "phash-s":
-        hashfunc = phash_simple
-    elif hash_method == 'dhash-h':
+    elif hash_method == 'dHash':
         hashfunc = dhash
-    elif hash_method == 'dhash-v':
-        hashfunc = dhash_vertical
 
-    images = {}
+    images_hash = {}
     for img in sorted(image_filenames):
         hash_value = hashfunc(Image.open(img))
-        hash_value = str(hash_value)
-        images[hash_value] = images.get(hash_value, []) + [img]
+        images_hash[img] = [hash_value, 0]
 
-    return images
+    images_cls = {}
+    # under constructing...
+    # use bfs to set class for images, whoes hash_value different is less than 8
+
+
+    return images_cls
 
 
 def del_images(imgs_list):
