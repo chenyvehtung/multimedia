@@ -7,11 +7,11 @@ A simple application for removing similar images in the selected path. Based on 
 
 ## Install
 
-The project provides with a debain package, which is packed up under Ubuntu 14.10
+The project provides with a debain package, which is packed up under Ubuntu 16.04
 Use the following command to install it
 
 ```sh
-sudo dpkg -i uniqimg_0.1.0_all.deb
+sudo dpkg -i uniqimg_0.1.2_all.deb
 sudo apt -f install
 ```
 

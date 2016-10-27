@@ -1,3 +1,0 @@
-
-PIL: pip install Pillow
-scipy: pip install scipy
