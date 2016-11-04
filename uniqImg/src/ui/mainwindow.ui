@@ -70,6 +70,12 @@ The directory doesn't contain any duplicate images</string>
     </item>
     <item row="1" column="0" colspan="3">
      <widget class="QLabel" name="labelWait">
+      <property name="font">
+       <font>
+        <family>HVD Bodedo</family>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Searching for the similar image</string>
       </property>

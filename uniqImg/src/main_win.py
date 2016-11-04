@@ -2,8 +2,9 @@
 from PyQt4 import QtCore, QtGui
 from ui.main_win_ui import Ui_uniqimg
 from ui.gd_dlg_ui import Ui_Dialog
-from backend.services import find_simialr_imgs
+# from backend.services import find_simialr_imgs
 from rm_dlg import RemoveDlg
+from backend.services_thread import FindImgThread
 
 
 __all__ = ["MainWin"]
@@ -33,6 +34,11 @@ class MainWin(QtGui.QMainWindow):
         QtGui.QWidget.__init__(self, parent)
         self.ui = Ui_uniqimg()
         self.ui.setupUi(self)
+
+        self.progressBar = QtGui.QProgressBar()
+        self.progressBar.setRange(0, 100)
+        self.progressBar.setValue(0)
+        self.ui.statusbar.addPermanentWidget(self.progressBar)
 
         self.init_toolbar()
         self.label_show("labelWel")
@@ -90,14 +96,19 @@ class MainWin(QtGui.QMainWindow):
         self.ui.editPath.setFocus(True)
 
     def image_search(self):
+        self.clr_imgs()
         self.label_show("labelWait")
+
         userpath = unicode(self.ui.editPath.text())
         hash_method = self.comboAlg.currentText()
         search_depth = self.comboMethod.currentText()
-        self.images = find_simialr_imgs(userpath, hash_method, search_depth)
-        self.image_show()
+        self.find_img_thread = FindImgThread(userpath, hash_method, search_depth)
+        self.find_img_thread.finishSignal.connect(self.image_show)
+        self.find_img_thread.progressBarSignal.connect(self.progressBar.setValue)
+        self.find_img_thread.start()
 
-    def image_show(self):
+    def image_show(self, images):
+        self.images = images
 
         # clear the images shown before
         self.clr_imgs()
@@ -108,7 +119,7 @@ class MainWin(QtGui.QMainWindow):
 
         row, col = 0, 0
         no_duplicate = True
-        for k, img_list in self.images.iteritems():
+        for k, img_list in images.iteritems():
             if len(img_list) > 1:
                 no_duplicate = False
                 grview = QtGui.QGraphicsView()
@@ -134,14 +145,16 @@ class MainWin(QtGui.QMainWindow):
         rmdlg = RemoveDlg(self.images[int(img_cls)])
         rmdlg.exec_()
         # reshow gridShow for update
-        self.image_show()
+        self.image_show(self.images)
 
     def label_show(self, label_name="labelHide"):
         self.ui.labelWel.setVisible(False)
         self.ui.labelWait.setVisible(False)
         self.ui.labelCon.setVisible(False)
+        self.progressBar.hide()
         if label_name == "labelWait":
             self.ui.labelWait.setVisible(True)
+            self.progressBar.show()
             self.ui.statusbar.showMessage("  Searching...")
             # print "Searching....."
         elif label_name == "labelWel":
@@ -152,7 +165,6 @@ class MainWin(QtGui.QMainWindow):
             self.ui.labelCon.setVisible(True)
             self.ui.statusbar.showMessage("  No duplicate")
         else:
-            # hide all of the label
             self.ui.statusbar.showMessage("  All done")
 
     def clr_imgs(self):
