@@ -102,9 +102,11 @@ class MainWin(QtGui.QMainWindow):
         userpath = unicode(self.ui.editPath.text())
         hash_method = self.comboAlg.currentText()
         search_depth = self.comboMethod.currentText()
-        self.find_img_thread = FindImgThread(userpath, hash_method, search_depth)
+        self.find_img_thread = FindImgThread()
+        self.find_img_thread.set_params(userpath, hash_method, search_depth)
         self.find_img_thread.finishSignal.connect(self.image_show)
         self.find_img_thread.progressBarSignal.connect(self.progressBar.setValue)
+        self.find_img_thread.disabledSignal.connect(self.set_rel_widget_disabled)
         self.find_img_thread.start()
 
     def image_show(self, images):
@@ -168,7 +170,6 @@ class MainWin(QtGui.QMainWindow):
             self.ui.statusbar.showMessage("  All done")
 
     def clr_imgs(self):
-        import sip
         while self.ui.gridShow.count() > 0:
             item = self.ui.gridShow.takeAt(0)
             if not item:
@@ -176,3 +177,11 @@ class MainWin(QtGui.QMainWindow):
             w = item.widget()
             if isinstance(w, QtGui.QGraphicsView):
                 w.deleteLater()
+
+    def set_rel_widget_disabled(self, b):
+        self.ui.editPath.setDisabled(b)
+        self.ui.buttonOpen.setDisabled(b)
+        self.ui.buttonSearch.setDisabled(b)
+        self.ui.toolBar.setDisabled(b)
+        self.ui.actionOpen_Folder.setDisabled(b)
+        self.ui.actionHomepage.setDisabled(b)

@@ -2,8 +2,10 @@
 
 from ui.rm_dlg_ui import Ui_viewDialog
 from PyQt4 import QtGui, QtCore
+from PyQt4.QtGui import QMessageBox
 import sys
-from backend.services import del_images
+# from backend.services import del_images
+from backend.services_thread import DelFileThread
 
 
 class RemoveDlg(QtGui.QDialog):
@@ -42,34 +44,39 @@ class RemoveDlg(QtGui.QDialog):
         self.ui.graphicsView.setScene(scene)
 
     def rm_imgs(self):
-        rm_imgs_id = []
+        self.rm_imgs_id = []
         model = self.ui.listView.model()
         for idx in xrange(model.rowCount()):
             item = model.item(idx)
             if item.isCheckable() and item.checkState() == QtCore.Qt.Checked:
-                rm_imgs_id.append(idx)
+                self.rm_imgs_id.append(idx)
 
-        from PyQt4.QtGui import QMessageBox
-        if len(rm_imgs_id) > 0:
-            msg_text = "Do you really want to remove the selected %d images?" % len(rm_imgs_id)
+        if len(self.rm_imgs_id) > 0:
+            msg_text = "Do you really want to remove the selected %d images?" % len(self.rm_imgs_id)
             ans = QMessageBox.question(None, "Remove Images", msg_text,
                                     QMessageBox.Yes or QMessageBox.No, QMessageBox.No)
             if ans == QMessageBox.Yes:
-                status, info = del_images([unicode(self.img_list[idx][0]) for idx in rm_imgs_id])
-                if status:
-                    QMessageBox.information(None, "Remove Succeed", info, QMessageBox.Ok)
-                    # remove the delete images from img_list
-                    offset = 0
-                    for idx in rm_imgs_id:
-                        del self.img_list[idx - offset]
-                        offset += 1
-                else:
-                    QMessageBox.warning(None, "Remove Failed", info)
-                self.close()
+                self.del_img_thread = DelFileThread()
+                self.del_img_thread.set_params([unicode(self.img_list[idx][0]) for idx in self.rm_imgs_id])
+                self.del_img_thread.finishSignal.connect(self.show_results)
+                self.del_img_thread.start()
         else:
             QMessageBox.information(None, "Remove Images",
                                     "You haven't selected any images yet, please check some.",
                                     QMessageBox.Ok)
+
+    def show_results(self, info_list):
+        status, info = info_list
+        if status:
+            QMessageBox.information(None, "Remove Succeed", info, QMessageBox.Ok)
+            # remove the delete images from img_list
+            offset = 0
+            for idx in self.rm_imgs_id:
+                del self.img_list[idx - offset]
+                offset += 1
+        else:
+            QMessageBox.warning(None, "Remove Failed", info)
+        self.close()
 
     def check_all(self):
         model = self.ui.listView.model()
