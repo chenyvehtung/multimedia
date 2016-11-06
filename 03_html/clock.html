@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" href="http://s8.51cto.com/wyfs01/M02/31/A1/wKioJlJx6ZWyFcIpAACuEUzoPwc110.jpg-wh_651x-s_1058122097.jpg" type="image/x-icon">
+    <title>中文数字时钟</title>
+    <meta name="Author" lang=“zh” content="donald"/>
+    <!-- css style for this page -->
+    <style>
+    body {
+        background-color: black;
+    }
+    .content {
+        padding: 10px;
+        margin-left: 20%;
+        margin-top: 30px;
+        width: 60%;
+        color: green;
+        background: black;
+    }
+    .clock-content {
+        padding: 10px;
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: 0px 0px 15px #888889;
+        font-size: large;
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <h1 align=center>中文数字时钟</h1>
+        <div class="clock-content">
+            <p>日期： <span id="date"></span> <span id="week"></span></p>
+            <p>时间： <span id="time"></span> </p>
+            <p>作者： Yuedong &lt;chenyd@yandex.com&gt; </p>
+        </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+    //left pad number n with '0' to meet with the given lenght width
+    function lpad(n, width) {
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+    }
+    week_zh = new Array("日", "一", "二", "三", "四", "五", "六");
+
+    function startTime() {
+        cur_date = new Date();
+        // set current date
+        document.getElementById("date").innerHTML =
+                (cur_date.getYear() + 1900).toString() + "年"
+                + lpad(cur_date.getMonth() + 1, 2) + "月"
+                + lpad(cur_date.getDate(), 2) + "日";
+        // set current week
+        document.getElementById("week").innerHTML = "星期" + week_zh[cur_date.getDay()];
+        // set current time
+        document.getElementById("time").innerHTML =
+                lpad(cur_date.getHours(), 2) + "时"
+                + lpad(cur_date.getMinutes(), 2) + "分"
+                + lpad(cur_date.getSeconds(), 2) + "秒";
+        t = setTimeout(function(){
+            startTime();
+        }, 500)
+    }
+
+    startTime();
+    </script>
+
+    
+</body>
+</html>
