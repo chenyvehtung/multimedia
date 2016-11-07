@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="通信技术 计算机学 科技 会计"></meta>
+    <meta name="description" content="超文本标记语言，标准通用标记语言下的一个应用。包括“头”部分（英语：Head）、和“主体”部分（英语：Body），其中“头”部提供关于网页的信息，“主体”部分提供网页的具体内容。万维网上的一个 超媒体文档称之为一个 页面（ 外语：page）。作为一个组织或者个人在 万维网上放置开始点的 页面称为 主页（外语：Homepage）或首页，主页中通常包括有指向其他相关页面或其他节点的 指针（ 超级链接）"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="shortcut icon" href="http://ugc.qpic.cn/baikepic/27732/cut-20131205091952-1687568030.jpg/0" type="image/x-icon">
+    <title>HTML入门</title>
+    <meta name="Author" lang=“zh” content="donald"/>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <!--设置导航栏-->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            HTML入门
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="html-docs-header">
+        <div class="container">
+            <h1>HTML入门</h1>
+            <p>超文本标记语言（HTML），标准通用标记语言下的一个应用。包括“头”部分
+                （英语：Head）、和“主体”部分（英语：Body），其中“头”部提供关于网页的信息，
+                “主体”部分提供网页的具体内容。</p>
+        </div>
+    </div>
+
+    <!--设置中间显示块-->
+    <div class="content">
+        <h2>一. 段落与文字标签</h2>
+        <h3>1.1 p（paragraph段落）</h3>
+        格式：&lt;p&gt;段落内容&lt;/p&gt;<br>
+        显示效果：
+        <div class="code-block">
+            <p>这是一个简答的段落</p>
+        </div>
+
+        <h3>1.2 pre（preformatted text预排文本）</h3>
+        格式：&lt;pre&gt;预排文本&lt;/pre&gt;<br>
+        显示效果：
+        <div >
+            <pre>
+            床前明月光		疑是地上霜
+            举头望明月		低头思故乡</pre>
+        </div>
+
+        <h3>1.3 div（division分区）</h3>
+        格式：&lt;div&gt;块级元素组&lt;/div&gt;<br>
+        显示效果：
+        <div class="code-block">
+            <div>这是一个简单的div测试</div>
+        </div>
+
+        <h3>1.4 hr（horizontal rule水平标线）</h3>
+        格式：&lt;hr/&gt;或&lt;hr&gt;<br>
+        显示效果：
+        <div class="code-block">
+            <hr size="5" width="50%" align="center"/>
+            <hr noshade size="5" width="200" align="center"/>
+        </div>
+
+        <h3>1.5 font（字体）</h3>
+        格式：&lt;font&gt;文本内容&lt;/font&gt;<br>
+        说明：设置文本所用的字型、大小和颜色等属性<br>
+        显示效果：
+        <div class="code-block">
+            <font size="1">1号字</font><br>
+            <font size="2">2号字</font><br>
+            <font face="宋体">宋体</font><br>
+            <font face="黑体">黑体</font>
+        </div>
+
+
+        <h2>二. 文字样式标签</h2>
+        格式：&lt;标签名&gt;文字&lt;/标签名&gt;<br>
+        <h3>2.1 物理样式</h3>
+        显示效果：
+        <div class="code-block">
+            <big>大字体</big><br>
+            <small>小字体</small><br>
+            <b>粗体</b><br>
+            <i>斜体</i><br>
+            <u>下划线</u>
+        </div>
+
+        <h3>2.2 逻辑样式</h3>
+        显示效果：
+        <div class="code-block">
+            <strong>重点强调</strong><br>
+            <cite>引用</cite><br>
+            <code>import numpy as np</code>
+        </div>
+
+        <h2>三. 列表(list)</h2>
+        <h3>3.1 ul（unordered list无序列表）</h3>
+        格式：&lt;ul&gt;表项序列&lt;/ul&gt;<br>
+        说明：为表项集合，与上下段之间各有一空行。每个表项前有项目符，表项后换行；同级表项左对齐、嵌套的次级表项右缩进<br>
+        显示效果：
+        <div class="code-block">
+            <ul>无序列表
+                <li>标题
+                <ul>
+                    <li>标题级别
+                    <li>标题对齐
+                </ul>
+                    <li>段落
+                    <li>字体
+                <ul>
+                    <li>字体大小
+                    <ul>
+                        <li>英文字体
+                        <li>中文字体
+                    </ul>
+                    <li>字体种类
+                    <li>字体颜色
+                </ul>
+            </ul>
+        </div>
+
+        <h3>3.2 ol（ordered list有序列表）</h3>
+        说明：格式、语法、说明等都似ul，只是项目符为数字或字母所组成的序号符<br>
+        显示效果：
+        <div class="code-block">
+            <ol type=I>有序列表
+                <li>标题
+                <ol type=i>
+                    <li>标题级别
+                    <li>标题对齐
+                </ol>
+                    <li>段落
+                    <li>字体
+                <ol type=A>
+                    <li>字体大小
+                    <ol type=a>
+                        <li>英文字体
+                        <li>中文字体
+                    </ol>
+                    <li>字体种类
+                    <li>字体颜色
+                </ol>
+            </ol>
+        </div>
+
+        <h3>3.3 dl（definition list定义列表）</h3>
+        语法：
+        <ul>
+            <li>&lt;dl&gt; (dt | dd)+ &lt;/dl&gt;</li>
+            <li>&lt;dt&gt; (行内元素)*  &lt;/dt&gt;</li>
+            <li>&lt;dd&gt; (流元素)*&lt;/dd&gt;</li>
+        </ul>
+        说明：dt与dd元素的结束标签可省，定义项与定义描述一般成对出现<br>
+        显示效果：
+        <div class="code-block">
+            <dl>定义列表
+                <dt>dl</dt> <dd>Definition List</dd>
+                <dt>dt</dt> <dd>Definition Term</dd>
+                <dt>dd</dt>
+                <dd>Definition Description</dd>
+            </dl>
+        </div>
+
+        <h2>四. 图片(image)</h2>
+        浏览器一般在网页中支持GIF/JPEG/PNG图片格式。图片在网页中可用作网页背景图、嵌入式插图和超链接的热点
+        <h3>4.1 背景图</h3>
+        格式：&lt;body background=“图片文件地址URI”&gt; 文档体内容&lt;/body&gt; <br>
+        说明：图片会像瓷砖一样重复排列，铺满网页窗口
+
+        <h3>4.2 插图</h3>
+        格式：&lt;img src = uri alt = text …/&gt;<br>
+        说明：img元素将资源指定的图片嵌入文档中定义该元素的位置处。img为空标签<br>
+        显示效果：
+        <div class="code-block">
+            <img src="https://www.sogou.com/index/images/logo_440x140.png"/>
+        </div>
+
+
+        <h2>五. 超链接(hyperlink)</h2>
+        <h3>5.1 锚元素标签a(anchor)</h3>
+        格式：&lt;a [ 属性=“属性值”]…&gt; 锚内容&lt;/a&gt; <br>
+        显示效果：
+        <div class="code-block">
+            <a href="https://www.sogou.com">搜狗搜索</a>
+        </div>
+
+        <h2>六. 表格(table)</h2>
+        <h3>6.1 table（表格）</h3>
+        格式：&lt;table&gt; 表格内容&lt;/table&gt; <br>
+        显示效果：
+        <div class="code-block">
+            <table align="center" border>
+            	<caption>完整表格的例子</caption>
+            	<thead>
+            		<tr> <th>表头1</th> <th>表头2</th> <th>表头3</th> </tr>
+            	</thead>
+            	<tfoot>
+            		<tr> <th>表尾1</th> <th>表尾2</th> <th>表尾3</th> </tr>
+            	</tfoot>
+            	<tbody>
+            		<tr> <td>表项11</td> <td>表项12</td> <td>表项13</td> </tr>
+            		<tr> <td>表项21</td> <td>表项22</td> <td>表项23</td> </tr>
+            		<tr> <td>表项31</td> <td>表项32</td> <td>表项33</td> </tr>
+            		<tr> <td>表项41</td> <td>表项42</td> <td>表项43</td> </tr>
+            	</tbody>
+            </table>
+        </div>
+        <div class="code-block">
+            <table border=“10” align=center>
+            	<caption align=“bottom”><b>学生成绩单</b></caption>
+            	<col span=“3” align=“left”> <col align=“center”> <col align=“right”>
+            	<tr> <th rowspan=“2”>学生</th> <th>姓名</th> <td>张三</td> <td>李四</td> <td>王五</td> </tr>
+            	<tr> <th>学号</th> <td>01</td> <td>02</td> <td>03</td> </tr>
+            	<tr> <th rowspan=“3”>成绩</th> <th>平时</th> <td>80</td> <td>40</td> <td>80</td> </tr>
+            	<tr> <th>考试</th> <td>95</td> <td>65</td> <td>55</td> </tr>
+            	<tr> <th>总评</th> <td>91</td> <td bgcolor=“red”>58</td> <td>63</td> </tr>
+            </table>
+        </div>
+
+        <h2>七. 表单(form)</h2>
+        表单是网页中输入和选择等控件项目组成的栏目，用作C/S或B/S交互——浏览器向服务器或脚本提交用户输入和选择的信息
+        <h3>7.1 form（表单）</h3>
+        格式：&lt;form&gt;表单内容&lt;/form&gt; <br>
+        显示效果：
+        <div class="code-block-sp">
+            <form action="https://www.sogou.com/web" enctype="multipart/form-data" method="post">
+               搜狗搜索： <input type="text" name="query"><br>
+               <input type="submit"> <input type="reset">
+            </form>
+        </div>
+
+        <h3>7.2 input（输入）</h3>
+        格式：&lt;input&gt;或&lt;/input&gt; <br>
+        显示效果：
+        <div class="code-block-sp">
+        	<form action="http://somesite.com/prog/adduser" method="post">
+        		<p>
+        		First name: <input type="text" name="firstname"><br>
+        		Last name: <input type="text" name="lastname"><br>
+        		email: <input type="text" name="email"><br>
+        		<input type="radio" name="sex" value="Male"> Male<br>
+        		<input type="radio" name="sex" value="Female"> Female<br>
+        		<input type="submit" value="Send"> <input type="reset">
+        		</p>
+        	 </form>
+        </div>
+
+        <div style="text-align:right">
+            <a href="#">返回顶部</a>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+</body>
+<footer>
+    <p align=center>Powered by Donald, 3rd, Nov. 2016</p>
+</footer>
+</html>
