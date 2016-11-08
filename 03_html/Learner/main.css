@@ -1,5 +1,5 @@
 body {
-    background-color: silver;
+    /*background-color: silver;*/
     padding-top: 50px;
 }
 
@@ -27,28 +27,37 @@ body {
 
 
 .html-docs-content {
-    background-color:#FFFFFF
+    background-color:#FFFFFF;
+    padding: 15px;
 }
-
 .code-block {
     background-color: #282c34;
     color: #FFFFFF;
     padding: 1px 10px;
     margin: 5px;
     border-radius: 4px;
+    display: none;
 }
 .code-block-sp {
     padding: 10px;
-    margin: 5px;
-    border-radius: 4px;
-    border-style: solid;
+    border: 1px solid #e5e5e5;
     border-width: 1px;
+    background-color: white;
+    color: black;
 }
+.show-block-btn {
+    padding: 1px 20px;
+}
+
+
 
 .html-docs-catalog {
     background-color:#FFFFFF;
     padding: 10px;
     padding-top: 1px;
+}
+.html-docs-catalog a {
+    text-decoration: none;
 }
 .catalog-title {
     font-weight: bold;
@@ -56,10 +65,52 @@ body {
 .catalog-subtitle {
     padding-left: 2em;
 }
+.flash {
+  -webkit-animation: flash 1.5s;
+  -moz-animation: flash 1.5s;
+  -ms-animation: flash 1.5s;
+  -o-animation: flash 1.5s;
+  animation: flash 1.5s; }
+@-webkit-keyframes flash {
+    from, to {
+        color: inherit;
+        -webkit-transform: translateX(0); }
+    35% {
+        color: #428bca;
+        -webkit-transform: translateX(0.75em); } }
+@-moz-keyframes flash {
+    from, to {
+        color: inherit;
+        -moz-transform: translateX(0); }
+    35% {
+        color: #428bca;
+        -moz-transform: translateX(0.75em); } }
+@-ms-keyframes flash {
+    from, to {
+        color: inherit;
+        -ms-transform: translateX(0); }
+    35% {
+        color: #428bca;
+        -ms-transform: translateX(0.75em); } }
+@-o-keyframes flash {
+    from, to {
+        color: inherit;
+        -o-transform: translateX(0); }
+    35% {
+        color: #428bca;
+        -o-transform: translateX(0.75em); } }
+@keyframes flash {
+    from, to {
+        color: inherit;
+        transform: translateX(0); }
+    35% {
+        color: #428bca;
+        transform: translateX(0.75em); } }
+
 
 #go-to-top {
     position: fixed;
-    bottom: 50px;
+    bottom: 90px;
     right: 50px;
     background-color: gray;
     color: white;
@@ -74,4 +125,29 @@ body {
 }
 #go-to-top span {
     opacity: 1.0;
+}
+
+.html-docs-footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 50px;
+    color: #777;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+}
+.html-docs-footer p {
+    margin-bottom: 0px;
+    margin-right: 0px;
+}
+.html-docs-footer-links {
+    padding-left: 0;
+    margin-top: 20px;
+    color: #999;
+}
+.html-docs-footer-links li {
+    display: inline;
+    padding: 0 2px;
+}
+.html-docs-footer a {
+    text-decoration: none;
 }

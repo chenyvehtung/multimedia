@@ -1,3 +1,16 @@
+/*----------------------- Add button to show preview -------------------------*/
+var code_blocks = document.querySelectorAll(".code-block");
+for (var i = 0; i < code_blocks.length; ++i) {
+    var code_block = code_blocks[i];
+    code_block.outerHTML =
+        '<button type="button" class="btn btn-info show-block-btn">预览</button>'
+        + code_block.outerHTML;
+}
+$('.show-block-btn').click(function(){
+    $(this).next('.code-block').slideToggle();
+});
+
+
 /*--------------------------- Show date and time --------------------------------------*/
 //left pad number n with '0' to meet with the given lenght width
 function lpad(n, width) {
@@ -23,15 +36,19 @@ function startTime() {
         startTime();
     }, 500)
 }
-
 startTime();
+
 
 /*--------------------------- Auto generate Catalog --------------------------*/
 function scrollView(title_id) {
+    var target = $("#" + title_id);
     $('html, body').animate({
-        scrollTop: $("#" + title_id).offset().top - 70
-    }, "slow");
-
+        scrollTop: target.offset().top - 70
+    }, "slow", function() {
+        target.addClass('flash').delay(1600).queue(function() {
+            $(this).removeClass('flash').dequeue();
+        });
+    });
 }
 
 var intro_blocks = document.getElementsByClassName('intro-block');
