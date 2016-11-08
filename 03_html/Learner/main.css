@@ -47,5 +47,31 @@ body {
 
 .html-docs-catalog {
     background-color:#FFFFFF;
-    padding: 1px 10px;
+    padding: 10px;
+    padding-top: 1px;
+}
+.catalog-title {
+    font-weight: bold;
+}
+.catalog-subtitle {
+    padding-left: 2em;
+}
+
+#go-to-top {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    font-size: 2em;
+    cursor: pointer;
+    opacity: 0.5;
+    z-index: 2147483647;
+}
+#go-to-top:hover {
+    opacity: 1.0;
+}
+#go-to-top span {
+    opacity: 1.0;
 }

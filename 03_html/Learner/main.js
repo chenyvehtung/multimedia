@@ -1,3 +1,4 @@
+/*--------------------------- Show date and time --------------------------------------*/
 //left pad number n with '0' to meet with the given lenght width
 function lpad(n, width) {
     n = n + '';
@@ -24,3 +25,48 @@ function startTime() {
 }
 
 startTime();
+
+/*--------------------------- Auto generate Catalog --------------------------*/
+function scrollView(title_id) {
+    $('html, body').animate({
+        scrollTop: $("#" + title_id).offset().top - 70
+    }, "slow");
+
+}
+
+var intro_blocks = document.getElementsByClassName('intro-block');
+var catalog_part = document.getElementById('catalog-part');
+catalog_part.innerHTML = "";
+for (i = 0; i < intro_blocks.length; ++i) {
+    intro_block_h2 = intro_blocks[i].getElementsByTagName('h2')[0];
+    intro_block_h2.id = "title-" + i.toString();
+    catalog_part.innerHTML += '<a href="#" class="catalog-title" '
+                             + 'onclick="scrollView(' + "'"
+                             + intro_block_h2.id + "'" + '); return false;">'
+                             + intro_block_h2.innerText + '</a><br/>';
+
+    intro_block_h3s =  intro_blocks[i].getElementsByTagName('h3');
+    for (j = 0; j < intro_block_h3s.length; ++j) {
+        intro_block_h3 = intro_block_h3s[j];
+        intro_block_h3.id = "title-" + i.toString() + j.toString();
+        catalog_part.innerHTML += '<a href="#" class="catalog-subtitle" '
+                                 + 'onclick="scrollView(' + "'"
+                                 + intro_block_h3.id + "'" + '); return false;">'
+                                 + intro_block_h3.innerText + '</a><br/>';
+    }
+}
+
+/*--------------------------- Go to top --------------------------*/
+document.getElementById('go-to-top').onclick = function(){
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+}
+
+$("#go-to-top").hide();
+$(window).scroll(function() {
+    if ($(window).scrollTop() > 300) {
+        $("#go-to-top").fadeIn("slow");
+    }
+    else {
+        $("#go-to-top").fadeOut("fast");
+    }
+});
