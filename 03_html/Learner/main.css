@@ -26,11 +26,7 @@ body {
 .html-docs-header .container{position:relative;}
 
 
-.content {
-    width:90%;
-    margin-left:5%;
-    padding: 20px;
-    margin-top: 20px;
+.html-docs-content {
     background-color:#FFFFFF
 }
 
@@ -47,4 +43,9 @@ body {
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
+}
+
+.html-docs-catalog {
+    background-color:#FFFFFF;
+    padding: 1px 10px;
 }

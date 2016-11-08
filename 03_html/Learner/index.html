@@ -16,11 +16,15 @@
     <!--设置导航栏-->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header row">
           <a class="navbar-brand" href="#">
             HTML入门
           </a>
         </div>
+        <div class="col-md-offset-4 col-md-3">
+            <p class="navbar-text" id="date"></p>
+        </div>
+        <p class="navbar-text navbar-right col-md-1" id="time"></p>
       </div>
     </nav>
 
@@ -34,7 +38,10 @@
     </div>
 
     <!--设置中间显示块-->
-    <div class="content">
+    <div class="container">
+    <div class="row">
+    <div class="col-md-9 html-docs-content">
+    <div class="intro-block">
         <h2>一. 段落与文字标签</h2>
         <h3>1.1 p（paragraph段落）</h3>
         格式：&lt;p&gt;段落内容&lt;/p&gt;<br>
@@ -77,8 +84,9 @@
             <font face="宋体">宋体</font><br>
             <font face="黑体">黑体</font>
         </div>
+    </div>
 
-
+    <div class="intro-block">
         <h2>二. 文字样式标签</h2>
         格式：&lt;标签名&gt;文字&lt;/标签名&gt;<br>
         <h3>2.1 物理样式</h3>
@@ -98,7 +106,9 @@
             <cite>引用</cite><br>
             <code>import numpy as np</code>
         </div>
+    </div>
 
+    <div class="intro-block">
         <h2>三. 列表(list)</h2>
         <h3>3.1 ul（unordered list无序列表）</h3>
         格式：&lt;ul&gt;表项序列&lt;/ul&gt;<br>
@@ -166,7 +176,9 @@
                 <dd>Definition Description</dd>
             </dl>
         </div>
+    </div>
 
+    <div class="intro-block">
         <h2>四. 图片(image)</h2>
         浏览器一般在网页中支持GIF/JPEG/PNG图片格式。图片在网页中可用作网页背景图、嵌入式插图和超链接的热点
         <h3>4.1 背景图</h3>
@@ -180,8 +192,9 @@
         <div class="code-block">
             <img src="https://www.sogou.com/index/images/logo_440x140.png"/>
         </div>
+    </div>
 
-
+    <div class="intro-block">
         <h2>五. 超链接(hyperlink)</h2>
         <h3>5.1 锚元素标签a(anchor)</h3>
         格式：&lt;a [ 属性=“属性值”]…&gt; 锚内容&lt;/a&gt; <br>
@@ -189,7 +202,9 @@
         <div class="code-block">
             <a href="https://www.sogou.com">搜狗搜索</a>
         </div>
+    </div>
 
+    <div class="intro-block">
         <h2>六. 表格(table)</h2>
         <h3>6.1 table（表格）</h3>
         格式：&lt;table&gt; 表格内容&lt;/table&gt; <br>
@@ -222,7 +237,9 @@
             	<tr> <th>总评</th> <td>91</td> <td bgcolor=“red”>58</td> <td>63</td> </tr>
             </table>
         </div>
+    </div>
 
+    <div class="intro-block">
         <h2>七. 表单(form)</h2>
         表单是网页中输入和选择等控件项目组成的栏目，用作C/S或B/S交互——浏览器向服务器或脚本提交用户输入和选择的信息
         <h3>7.1 form（表单）</h3>
@@ -250,12 +267,21 @@
         		</p>
         	 </form>
         </div>
+    </div>
 
         <div style="text-align:right">
             <a href="#">返回顶部</a>
         </div>
 
     </div>
+
+    <div class="col-md-3">
+        <div class="html-docs-catalog">
+        <h2>目录</h2>
+        </div>
+    </div>
+
+    </div></div>
 
 
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
