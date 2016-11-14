@@ -1,8 +1,8 @@
-Package: uniqimg
+Package: imgpro
 Version: 0.1.3
 Section: utils
 Priority: optional
-Maintainer: donald <chenyd@yandex.com>
+Maintainer: lisa <zhulishe@qq.com>
 Architecture: all
-Depends: python2.7, python-qt4, python-numpy, python-scipy, python-pil
-Description: UNIQue IMaGe can save your disk space by removing duplicate images.
+Depends: python2.7, python-qt4, python-numpy, python-pil
+Description: IMaGe Process can help you process images

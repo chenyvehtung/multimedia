@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=0.1
+Encoding=UTF-8
+Name=ImgPro
+GenericName=Image Process
+Comment=A simple application that helps you process images
+Exec=imgpro
+Icon=/usr/share/pixmaps/imgpro.png
+Terminal=false
+Categories=GNOME;Graphics;

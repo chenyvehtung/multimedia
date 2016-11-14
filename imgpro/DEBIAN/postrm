@@ -2,4 +2,4 @@
 
 BIN_PATH='/usr/bin'
 
-rm -f $BIN_PATH/uniqimg
+rm -f $BIN_PATH/imgpro

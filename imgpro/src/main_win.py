@@ -33,11 +33,17 @@ class MainWin(QtGui.QMainWindow):
                                self.file_dialog)
         QtCore.QObject.connect(self.ui.buttonDefault, QtCore.SIGNAL("clicked()"),
                                self.image_default)
+        QtCore.QObject.connect(self.ui.buttonSave, QtCore.SIGNAL("clicked()"),
+                               self.image_save)
         QtCore.QObject.connect(self.ui.buttonResize, QtCore.SIGNAL("clicked()"),
                                self.image_resize)
         QtCore.QObject.connect(self.ui.buttonBlur, QtCore.SIGNAL("clicked()"),
                                self.image_blur)
+
         self.ui.buttonOpen.setAutoDefault(True)
+        self.ui.editH.returnPressed.connect(self.ui.buttonResize.click)
+        self.ui.editW.returnPressed.connect(self.ui.buttonResize.click)
+        self.ui.editS.returnPressed.connect(self.ui.buttonBlur.click)
 
     # setting up the actions
     @QtCore.pyqtSlot()
@@ -46,14 +52,18 @@ class MainWin(QtGui.QMainWindow):
         self.label_show("labelWel")
 
     @QtCore.pyqtSlot()
-    def on_actionOpen_Folder_triggered(self):
+    def on_actionOpen_Image_triggered(self):
         self.file_dialog()
+
+    @QtCore.pyqtSlot()
+    def on_actionSave_Image_triggered(self):
+        self.image_save()
 
     @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
         QtGui.QMessageBox.about(None, "About ImgPro",
-            "<p align='center' style='font-size:16pt'><b>Im</b>a<b>g</b>e <b>Pro</b>cess"
-            "is simple application that helps you to process image</p>"
+            "<p align='center' style='font-size:16pt'><b>Im</b>a<b>g</b>e <b>Pro</b>cess "
+            "is a simple application that helps you to process image</p>"
             "<p align='center' style='font-size:12pt'>Developed by <b>Lisa</b>.</p>"
             "<p align='center' style='font-size:12pt'>Nov. 2016</p>")
 
@@ -66,7 +76,8 @@ class MainWin(QtGui.QMainWindow):
         from os.path import expanduser
         fd = QtGui.QFileDialog(self)
         self.img_name = fd.getOpenFileName(caption="Open Image",
-                                            directory=expanduser("~"))
+                                            directory=expanduser("~"),
+                                            filter="Images (*.png *.gif *.jpg *.bmp *.jpeg)")
         self.image_default()
 
     def image_default(self):
@@ -75,6 +86,14 @@ class MainWin(QtGui.QMainWindow):
         self.ui.editW.setText(str(pix.width()))
         self.ui.editS.setText("0")
         self.image_show(pix)
+
+    def image_save(self):
+        fd = QtGui.QFileDialog(self)
+        cur_dir = '/'.join(str(self.img_name).split('/')[:-1])
+        save_name = fd.getSaveFileName(caption="Save Image",
+                                       directory=cur_dir,
+                                       filter="Images (*.png *.gif *.jpg *.bmp *.jpeg)")
+        self.pix.save(save_name)
 
     def image_resize(self):
         self.clr_imgs()
@@ -114,6 +133,7 @@ class MainWin(QtGui.QMainWindow):
         self.image_show(pix)
 
     def image_show(self, image):
+        self.pix = image
 
         # clear the image shown before
         self.clr_imgs()
@@ -153,10 +173,14 @@ class MainWin(QtGui.QMainWindow):
 
     def set_rel_widget_disabled(self, b):
         self.ui.buttonOpen.setDisabled(b)
+        self.ui.buttonDefault.setDisabled(b)
+        self.ui.buttonSave.setDisabled(b)
         self.ui.editH.setDisabled(b)
         self.ui.editW.setDisabled(b)
         self.ui.buttonResize.setDisabled(b)
         self.ui.editS.setDisabled(b)
         self.ui.buttonBlur.setDisabled(b)
+
         self.ui.actionOpen_Image.setDisabled(b)
         self.ui.actionHomepage.setDisabled(b)
+        self.ui.actionSave_Image.setDisabled(b)

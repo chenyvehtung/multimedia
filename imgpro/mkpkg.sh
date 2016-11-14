@@ -2,7 +2,7 @@
 
 APP_PATH='usr/share/applications'
 ICON_PATH='usr/share/pixmaps'
-SRC_PATH='usr/share/uniqimg'
+SRC_PATH='usr/share/imgpro'
 
 rm -rf ./pkg/
 rm -rf ./*.deb
@@ -17,7 +17,7 @@ cp -f ./src/backend/*.py ./pkg/$SRC_PATH/backend/
 mkdir ./pkg/$SRC_PATH/ui
 cp -f ./src/ui/*.py ./pkg/$SRC_PATH/ui/
 
-cp -f ./src/image/icon.png ./pkg/$ICON_PATH/uniqimg.png
-cp -f ./src/uniqimg.desktop ./pkg/$APP_PATH/
+cp -f ./src/image/icon.png ./pkg/$ICON_PATH/imgpro.png
+cp -f ./src/imgpro.desktop ./pkg/$APP_PATH/
 
-dpkg -b ./pkg uniqimg_0.1.3_all.deb
+dpkg -b ./pkg imgpro_0.1.3_all.deb
