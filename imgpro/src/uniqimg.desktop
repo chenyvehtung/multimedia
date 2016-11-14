@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=0.1
+Encoding=UTF-8
+Name=UniqImg
+GenericName=Unique Image
+Comment=A simple application that helps you remove duplicate images
+Exec=uniqimg
+Icon=/usr/share/pixmaps/uniqimg.png
+Terminal=false
+Categories=GNOME;Graphics;
