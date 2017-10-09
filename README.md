@@ -5,7 +5,7 @@ It is the collection of all my homework projects of the course *Multimedia Techn
 Some brief introduction of every single project will be listed in the following part, but for more details, please check out the subfolders of the related projects, and there is a detail report describing what is the project and how to run it in every single subproject.
 
 
-## Entropy
+## [Entropy](01_entropy/)
 
 The python implementation of three data compression algorithms, including Huffman coding, Arithmetic coding and LZW coding.
 
@@ -28,7 +28,7 @@ A basic webpage, aims to use as many HTML elements as possible.
 
 ## JavaScript
 
-A simple try of javascript, including a geek style webpage digital clock and an interative HTML learning page.
+A simple try of javascript, including a geek style webpage digital clock and an interactive HTML learning page.
 
 ![clock](_pics/4.jpg)
 
