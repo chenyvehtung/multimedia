@@ -12,21 +12,21 @@ The python implementation of three data compression algorithms, including Huffma
 ![entropy](_pics/1.jpg)
 
 
-## JPEG Codec
+## [JPEG Codec](02_jpeg_codec/)
 
 The python implementation of part of the JPEG image encoder and decoder algorithm.
 
 ![jpeg codec](_pics/2.jpg)
 
 
-## HTML
+## [HTML](03_html/)
 
 A basic webpage, aims to use as many HTML elements as possible.
 
 ![html](_pics/3.jpg)
 
 
-## JavaScript
+## [JavaScript](04_javascript/)
 
 A simple try of javascript, including a geek style webpage digital clock and an interactive HTML learning page.
 
@@ -35,14 +35,14 @@ A simple try of javascript, including a geek style webpage digital clock and an 
 ![javascript](_pics/5.jpg)
 
 
-## ImgPro (Image Processing)
+## [ImgPro (Image Processing)](imgpro/)
 
 A simple image processing desktop application based on PyQt4
 
 ![imgpro](_pics/6.jpg)
 
 
-## UniqImg (Unique Image)
+## [UniqImg (Unique Image)](uniqImg/)
 
 A simple application for removing similar images in the selected path. Based on PyQt4.
 
